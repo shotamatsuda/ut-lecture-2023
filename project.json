@@ -1,0 +1,61 @@
+{
+  "name": "ut-lecture-2023",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": ".",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/ut-lecture-2023"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "."
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "ut-lecture-2023:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "ut-lecture-2023:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "ut-lecture-2023:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "ut-lecture-2023:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectName}"],
+      "options": {
+        "jestConfig": "jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["./src"]
+      }
+    }
+  },
+  "tags": []
+}
