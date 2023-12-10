@@ -1,7 +1,7 @@
 {
-  "name": "app",
+  "name": "three",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/app",
+  "sourceRoot": "apps/three",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,11 +9,11 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/app"
+        "outputPath": "dist/apps/three"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/app"
+          "outputPath": "apps/three"
         },
         "production": {}
       }
@@ -22,16 +22,16 @@
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "app:build",
+        "buildTarget": "three:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "app:build:development",
+          "buildTarget": "three:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "app:build:production",
+          "buildTarget": "three:build:production",
           "dev": false
         }
       }
@@ -39,14 +39,14 @@
     "export": {
       "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "app:build:production"
+        "buildTarget": "three:build:production"
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/app/jest.config.ts"
+        "jestConfig": "apps/three/jest.config.ts"
       }
     },
     "lint": {
