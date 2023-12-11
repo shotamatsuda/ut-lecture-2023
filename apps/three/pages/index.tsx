@@ -1,8 +1,17 @@
 import styled from '@emotion/styled'
 import { NextPage } from 'next'
 
-const Root = styled.div``
+import { Main } from '../components/Main'
 
-const Index: NextPage = () => <Root>Three</Root>
+const Root = styled.div`
+  width: 100%;
+  height: 100%;
+`
+
+const Index: NextPage = () => (
+  <Root>
+    <Main />
+  </Root>
+)
 
 export default Index
