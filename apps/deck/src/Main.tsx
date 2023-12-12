@@ -1,6 +1,6 @@
 import { ViewStateChangeParameters } from '@deck.gl/core/typed/controllers/controller'
 import { Tile3DLayer, Tile3DLayerProps } from '@deck.gl/geo-layers/typed'
-import DeckGL from '@deck.gl/react/typed'
+import styled from '@emotion/styled'
 import { Tiles3DLoader } from '@loaders.gl/3d-tiles'
 import { Tile3D } from '@loaders.gl/tiles'
 import maplibre from 'maplibre-gl'
@@ -8,9 +8,22 @@ import { NextPage } from 'next'
 import { useCallback, useState } from 'react'
 import { Map } from 'react-map-gl'
 
+import { DeckGLOverlay } from './DeckGLOverlay'
 import { lightingEffect } from './lightingEffect'
 
 import 'maplibre-gl/dist/maplibre-gl.css'
+
+const Root = styled.div`
+  width: 100vw;
+  height: 100vh;
+`
+
+// Coordinates of Tokyo station.
+const position = { longitude: 139.7671, latitude: 35.6812 }
+
+// Derive geoidal height of the above here:
+// https://vldb.gsi.go.jp/sokuchi/surveycalc/geoid/calcgh/calc_f.html
+const geoidalHeight = 36.6624
 
 function overrideMaterial(tile: Tile3D): void {
   if (tile.content.gltf.materials.length > 0) {
@@ -20,12 +33,13 @@ function overrideMaterial(tile: Tile3D): void {
   }
 }
 
-const layerProps: Partial<Tile3DLayerProps> = {
+const layerProps = {
   loader: Tiles3DLoader,
   onTileLoad: tile => {
     overrideMaterial(tile)
+    tile.content.cartographicOrigin.z -= geoidalHeight
   }
-}
+} satisfies Partial<Tile3DLayerProps>
 
 const layers = [
   new Tile3DLayer({
@@ -42,9 +56,7 @@ const layers = [
 
 export const Main: NextPage = () => {
   const [viewState, setViewState] = useState({
-    // Coordinates of Tokyo station.
-    longitude: 139.7671,
-    latitude: 35.6812,
+    ...position,
     zoom: 14
   })
 
@@ -56,18 +68,16 @@ export const Main: NextPage = () => {
   )
 
   return (
-    <DeckGL
-      controller
-      layers={[layers]}
-      effects={[lightingEffect]}
-      initialViewState={viewState}
-      onViewStateChange={handleViewStateChange}
-    >
+    <Root>
       <Map
         // @ts-expect-error Assertion
         mapLib={maplibre}
         mapStyle='https://tile.openstreetmap.jp/styles/osm-bright/style.json'
-      />
-    </DeckGL>
+        initialViewState={viewState}
+        onViewStateChange={handleViewStateChange}
+      >
+        <DeckGLOverlay layers={[layers]} effects={[lightingEffect]} />
+      </Map>
+    </Root>
   )
 }

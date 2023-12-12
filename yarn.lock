@@ -1638,6 +1638,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@deck.gl/extensions@npm:^8.9.33":
+  version: 8.9.33
+  resolution: "@deck.gl/extensions@npm:8.9.33"
+  dependencies:
+    "@babel/runtime": "npm:^7.0.0"
+    "@luma.gl/shadertools": "npm:^8.5.21"
+  peerDependencies:
+    "@deck.gl/core": ^8.0.0
+    "@luma.gl/constants": ^8.0.0
+    "@luma.gl/core": ^8.0.0
+    "@math.gl/core": ^3.6.2
+    "@math.gl/web-mercator": ^3.6.2
+    gl-matrix: ^3.0.0
+  checksum: 3d988e43260692d067c5c1214646a077089f2e320a509eed24dd1950a83066a3df1a291ef687a1e402f0b8a6a780a8dba06377c4afb622ae7f4d41cdb87c8a44
+  languageName: node
+  linkType: hard
+
 "@deck.gl/geo-layers@npm:^8.9.33":
   version: 8.9.33
   resolution: "@deck.gl/geo-layers@npm:8.9.33"
@@ -4614,6 +4631,7 @@ __metadata:
     3d-tiles-renderer: "npm:^0.3.21"
     "@cesium/engine": "npm:^6.1.1"
     "@deck.gl/core": "npm:^8.9.33"
+    "@deck.gl/extensions": "npm:^8.9.33"
     "@deck.gl/geo-layers": "npm:^8.9.33"
     "@deck.gl/layers": "npm:^8.9.33"
     "@deck.gl/mapbox": "npm:^8.9.33"
