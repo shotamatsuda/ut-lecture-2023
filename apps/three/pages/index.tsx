@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { NextPage } from 'next'
 
-import { Main } from '../components/Main'
+import { Main } from '../src/Main'
 
 const Root = styled.div`
   width: 100%;
