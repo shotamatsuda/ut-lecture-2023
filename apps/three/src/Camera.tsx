@@ -1,7 +1,6 @@
 import { Ellipsoid } from '@math.gl/geospatial'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { FC, useMemo } from 'react'
-
 import { Vector3 } from 'three'
 
 export const Camera: FC<{

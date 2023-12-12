@@ -8,7 +8,7 @@ const gltfLoader = new GLTFLoader()
 gltfLoader.register(() => new GLTFCesiumRTCExtension())
 
 const material = new MeshStandardMaterial({
-  metalness: 0.5,
+  metalness: 0.5
 })
 
 export interface PlateauTilesetProps {

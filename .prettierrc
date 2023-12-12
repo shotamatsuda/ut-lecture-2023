@@ -1,8 +1,9 @@
 {
   "arrowParens": "avoid",
+  "importOrder": ["<THIRD_PARTY_MODULES>", "^[./]", "\\.css$"],
+  "importOrderSeparation": true,
   "jsxSingleQuote": true,
   "semi": false,
   "singleQuote": true,
-  "importOrder": ["<THIRD_PARTY_MODULES>", "^[./]"],
-  "importOrderSeparation": true
+  "trailingComma": "none"
 }
