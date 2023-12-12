@@ -4,8 +4,8 @@ import { FC } from 'react'
 
 import { Camera } from './Camera'
 import { EastNorthUp } from './EastNorthUp'
-import { PlateauTileset } from './PlateauTileset'
 import { SunLight } from './SunLight'
+import { Tileset } from './Tileset'
 
 export const Main: FC = () => {
   // Coordinates of Tokyo station.
@@ -27,8 +27,8 @@ export const Main: FC = () => {
           <meshStandardMaterial color='white' />
         </Plane>
       </EastNorthUp>
-      <PlateauTileset url='https://plateau.geospatial.jp/main/data/3d-tiles/bldg/13100_tokyo/13101_chiyoda-ku/notexture/tileset.json' />
-      <PlateauTileset url='https://plateau.geospatial.jp/main/data/3d-tiles/bldg/13100_tokyo/13102_chuo-ku/notexture/tileset.json' />
+      <Tileset url='https://plateau.geospatial.jp/main/data/3d-tiles/bldg/13100_tokyo/13101_chiyoda-ku/notexture/tileset.json' />
+      <Tileset url='https://plateau.geospatial.jp/main/data/3d-tiles/bldg/13100_tokyo/13102_chuo-ku/notexture/tileset.json' />
     </Canvas>
   )
 }

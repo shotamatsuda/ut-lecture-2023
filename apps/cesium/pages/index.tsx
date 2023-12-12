@@ -1,8 +1,7 @@
-import styled from '@emotion/styled'
 import { NextPage } from 'next'
 
-const Root = styled.div``
+import { Main } from '../src/Main'
 
-const Index: NextPage = () => <Root>Cesium</Root>
+const Index: NextPage = () => <Main />
 
 export default Index

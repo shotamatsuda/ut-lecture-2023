@@ -11,11 +11,11 @@ const material = new MeshStandardMaterial({
   metalness: 0.5
 })
 
-export interface PlateauTilesetProps {
+export interface TilesetProps {
   url: string
 }
 
-export const PlateauTileset: FC<PlateauTilesetProps> = ({ url }) => {
+export const Tileset: FC<TilesetProps> = ({ url }) => {
   const createTiles = useCallback((url: string) => {
     const tiles = new TilesRenderer(url)
     tiles.manager.addHandler(/\.gltf$/, gltfLoader)
