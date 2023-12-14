@@ -1,6 +1,8 @@
 import { Ellipsoid } from '@math.gl/geospatial'
-import { FC, ReactNode, useMemo } from 'react'
+import { FC, ReactNode, createContext, useMemo } from 'react'
 import { Matrix4, Quaternion } from 'three'
+
+export const EastNorthUpContext = createContext<Matrix4 | undefined>(undefined)
 
 export const EastNorthUp: FC<{
   longitude: number
@@ -12,14 +14,20 @@ export const EastNorthUp: FC<{
     [longitude, latitude]
   )
 
+  const matrix = useMemo(
+    () =>
+      new Matrix4().fromArray(
+        Ellipsoid.WGS84.eastNorthUpToFixedFrame(position)
+      ),
+    [position]
+  )
+
   const quaternion = useMemo(
     () =>
       new Quaternion().setFromRotationMatrix(
-        new Matrix4().fromArray(
-          Ellipsoid.WGS84.eastNorthUpToFixedFrame(position).getRotation()
-        )
+        new Matrix4().extractRotation(matrix)
       ),
-    [position]
+    [matrix]
   )
 
   return (
@@ -27,7 +35,9 @@ export const EastNorthUp: FC<{
       position={position as [number, number, number]}
       quaternion={quaternion}
     >
-      {children}
+      <EastNorthUpContext.Provider value={matrix}>
+        {children}
+      </EastNorthUpContext.Provider>
     </group>
   )
 }
