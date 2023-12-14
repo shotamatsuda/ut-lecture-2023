@@ -4,6 +4,7 @@ import { FC } from 'react'
 
 import { Camera } from './Camera'
 import { EastNorthUp } from './EastNorthUp'
+import { Paint } from './Paint'
 import { SunLight } from './SunLight'
 import { Tileset } from './Tileset'
 
@@ -26,6 +27,7 @@ export const Main: FC = () => {
         <Plane args={[1e5, 1e5]} position={[0, 0, geoidalHeight]} receiveShadow>
           <meshStandardMaterial color='white' />
         </Plane>
+        <Paint />
       </EastNorthUp>
       <Tileset url='https://plateau.geospatial.jp/main/data/3d-tiles/bldg/13100_tokyo/13101_chiyoda-ku/notexture/tileset.json' />
       <Tileset url='https://plateau.geospatial.jp/main/data/3d-tiles/bldg/13100_tokyo/13102_chuo-ku/notexture/tileset.json' />
