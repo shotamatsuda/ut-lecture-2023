@@ -6,33 +6,37 @@ import { Raycaster, Vector3 } from 'three'
 
 import { EastNorthUpContext } from './EastNorthUp'
 
+const raycaster = new Raycaster()
+
 const pointsAtom = atom<Vector3[]>([])
 
 export const Paint: FC = () => {
-  const scene = useThree(state => state.scene)
-  const camera = useThree(state => state.camera)
+  const scene = useThree(({ scene }) => scene)
+  const camera = useThree(({ camera }) => camera)
+
+  const matrix = useContext(EastNorthUpContext)
+  const inverseMatrix = useMemo(() => matrix?.clone()?.invert(), [matrix])
 
   const [points, setPoints] = useAtom(pointsAtom)
-  const matrix = useContext(EastNorthUpContext)
-  const invertedMatrix = useMemo(() => matrix?.invert(), [matrix])
 
   useFrame(state => {
-    if (invertedMatrix == null) {
+    if (inverseMatrix == null) {
       return
     }
-    const raycaster = new Raycaster()
     raycaster.setFromCamera(state.pointer, camera)
     const results = raycaster.intersectObject(scene)
-    if (results.length > 0) {
-      const normal = results[0].normal
-      if (normal == null) {
-        return
-      }
-      setPoints(points => [
-        ...points,
-        results[0].point.applyMatrix4(invertedMatrix).addScaledVector(normal, 2)
-      ])
+    if (results.length === 0) {
+      return
     }
+    const result = results[0]
+    const normal = result.normal
+    if (normal == null) {
+      return
+    }
+    setPoints(points => [
+      ...points,
+      result.point.addScaledVector(normal, 2).applyMatrix4(inverseMatrix)
+    ])
   })
 
   return (
